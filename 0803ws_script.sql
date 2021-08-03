@@ -1,11 +1,11 @@
 
+DROP TABLE order_table;
 DROP TABLE cart;
 DROP TABLE qna;
 DROP TABLE item;
-DROP TABLE order_table;
-DROP TABLE user;
+DROP TABLE users;
 
-CREATE TABLE user(
+CREATE TABLE users(
 	id VARCHAR(10),
 	pwd VARCHAR(20) NOT NULL,
 	name VARCHAR(20),
@@ -14,7 +14,7 @@ CREATE TABLE user(
 	phone VARCHAR(20) NOT NULL,
 	regdate DATE NOT NULL
 );
-ALTER TABLE user ADD PRIMARY KEY (id);
+ALTER TABLE users ADD PRIMARY KEY (id);
 
 # --------------------------------------------------------------------
 CREATE TABLE item(
@@ -43,7 +43,7 @@ ALTER TABLE qna ADD PRIMARY KEY (board_id);
 ALTER TABLE qna MODIFY board_id INT AUTO_INCREMENT;
 ALTER TABLE qna AUTO_INCREMENT = 1;
 ALTER TABLE qna ALTER COLUMN cnt SET DEFAULT 0;
-ALTER TABLE qna ADD CONSTRAINT FOREIGN KEY (id) REFERENCES user (id);
+ALTER TABLE qna ADD CONSTRAINT FOREIGN KEY (id) REFERENCES users (id);
 
 # -------------------------------------------------------------------------
 CREATE TABLE cart(
@@ -54,7 +54,7 @@ CREATE TABLE cart(
 	qt INT NOT NULL
 );
 ALTER TABLE cart ADD PRIMARY KEY (cartnum,id,num);
-ALTER TABLE cart ADD CONSTRAINT FOREIGN KEY (id) REFERENCES user (id);
+ALTER TABLE cart ADD CONSTRAINT FOREIGN KEY (id) REFERENCES users (id);
 ALTER TABLE cart ADD CONSTRAINT FOREIGN KEY (num) REFERENCES item (num);
 # -------------------------------------------------------------------------
 CREATE TABLE order_table(
