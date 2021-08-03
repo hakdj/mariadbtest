@@ -1,21 +1,28 @@
+
+DROP TABLE cart;
+DROP TABLE qna;
+DROP TABLE item;
+DROP TABLE order_table;
+DROP TABLE user;
+
 CREATE TABLE user(
 	id VARCHAR(10),
-	pshoppingwd VARCHAR(20),
+	pwd VARCHAR(20) NOT NULL,
 	name VARCHAR(20),
 	email VARCHAR(40),
-	address VARCHAR(100),
-	phone VARCHAR(20),
-	regdate DATE
+	address VARCHAR(100) NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+	regdate DATE NOT NULL
 );
 ALTER TABLE user ADD PRIMARY KEY (id);
 
 # --------------------------------------------------------------------
 CREATE TABLE item(
 	num INT,
-	product VARCHAR(100),
-	price INT,
+	product VARCHAR(100) NOT NULL,
+	price INT NOT NULL,
 	rate FLOAT,
-	regdate DATE,
+	regdate DATE NOT NULL,
 	content VARCHAR(2000)
 );
 
@@ -26,9 +33,9 @@ ALTER TABLE item AUTO_INCREMENT = 1;
 CREATE TABLE qna(
 	board_id INT,
 	id VARCHAR(10),
-	title VARCHAR(200),
-	content VARCHAR(2000),
-	r_date DATE,
+	title VARCHAR(200) NOT NULL,
+	content VARCHAR(2000) NOT NULL,
+	r_date DATE NOT NULL,
 	cnt INT,
 	r_content VARCHAR(2000)
 );
@@ -43,8 +50,8 @@ CREATE TABLE cart(
 	cartnum INT,
 	id VARCHAR(10),
 	num INT,
-	c_date DATE,
-	qt INT
+	c_date DATE NOT NULL,
+	qt INT NOT NULL
 );
 ALTER TABLE cart ADD PRIMARY KEY (cartnum,id,num);
 ALTER TABLE cart ADD CONSTRAINT FOREIGN KEY (id) REFERENCES user (id);
@@ -55,7 +62,7 @@ CREATE TABLE order_table(
 	cartnum INT,
 	id VARCHAR(10),
 	num2 INT,
-	o_date DATE
+	o_date DATE NOT NULL
 );
 
 ALTER TABLE order_table ADD PRIMARY KEY (ordernum,cartnum,id,num2);
