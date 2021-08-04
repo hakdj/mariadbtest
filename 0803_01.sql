@@ -86,7 +86,6 @@ DROP TABLE board;
 
 CREATE TABLE board(
 	board_id INT,
-	id VARCHAR(10),
 	title VARCHAR(200),
 	content VARCHAR(2000),
 	regdate DATE,
