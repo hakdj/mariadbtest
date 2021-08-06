@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.utils.http import urlencode
 
 from config.settings import UPLOAD_DIR
+from frame.cartdb import CartDB
 from frame.custdb import CustDB
 from frame.error import ErrorCode
 from frame.itemdb import ItemDB
@@ -12,6 +13,37 @@ from frame.itemdb import ItemDB
 
 def home(request):
     return render(request, 'home.html');
+
+def login(request):
+    return render(request, 'login.html');
+
+def loginimpl(request):
+    id = request.POST['id'];
+    pwd = request.POST['pwd'];
+    next='home.html';
+    try:
+        cust=CustDB().selectone(id);
+        if pwd == cust.pwd:
+            request.session['logincust']={'id':cust.id,'name':cust.name};
+            context=None;
+        else:
+            raise Exception;
+    except:
+        context={'msg':ErrorCode.e0003};
+        next='error.html'
+    return render(request, next,context);
+
+def logout(request):
+    if request.session['logincust'] != None:
+        del request.session['logincust'];
+    return render(request, 'home.html');
+
+def inputcart(request):
+    custid = request.GET['custid'];
+    itemid = request.GET['itemid'];
+    num=request.GET['num'];
+    CartDB().insert(custid,int(itemid),int(num));
+    return redirect('itemlist');
 
 def custlist(request):
     clist=CustDB().select();
@@ -111,14 +143,14 @@ def itemupdateimpl(request):
     price = request.POST['price'];
     oldimgname = request.POST['oldimgname'];
 
-    imgname='';
+    imgname ='';
     if 'newimg' in request.FILES:
         newimg=request.FILES['newimg'];
-        imgname=newimg._name;
-        fp = open('%s/%s' % (UPLOAD_DIR, imgname), 'wb')
+        imgname = newimg._name;
+        f = open('%s/%s' % (UPLOAD_DIR, imgname), 'wb')
         for chunk in newimg.chunks():
-            fp.write(chunk);
-            fp.close();
+            f.write(chunk);
+            f.close();
     else:
         imgname=oldimgname;
 
