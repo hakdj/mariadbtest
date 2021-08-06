@@ -20,17 +20,16 @@ class Item:
 
 class Cart:
     def __init__(self, regdate,custid,itemid,price,num,total,imgname):
-        self.regdate=regdate;
-        self.custid=custid;
-        self.itemid=itemid;
-        self.price=price;
-        self.num=num;
-        self.total=total;
-        self.imgname=imgname;
+        self.regdate = regdate;
+        self.custid = custid;
+        self.itemid = itemid;
+        self.price = price;
+        self.num = num;
+        self.total = total;
+        self.imgname = imgname;
     def __str__(self):
         return self.regdate+' '+self.custid+' '+self.itemid+' '\
             +self.price+' '+self.num+' '+self.total+' '+self.imgname;
-
 
 
 

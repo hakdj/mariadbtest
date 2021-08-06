@@ -41,13 +41,19 @@ def logout(request):
 def inputcart(request):
     custid = request.GET['custid'];
     itemid = request.GET['itemid'];
-    num=request.GET['num'];
+    num = request.GET['num'];
     CartDB().insert(custid,int(itemid),int(num));
     return redirect('itemlist');
 
+def cartlist(request):
+    custid = request.GET['custid'];
+    cartlist = CartDB().select(custid);
+    context = { 'cartlist':cartlist };
+    return render(request, 'cartlist.html',context);
+
 def custlist(request):
-    clist=CustDB().select();
-    context={'cl':clist};
+    clist = CustDB().select();
+    context = { 'cl':clist };
     return render(request, 'custlist.html',context);
 def custadd(request):
     return render(request, 'custadd.html');
