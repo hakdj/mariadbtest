@@ -28,6 +28,12 @@ urlpatterns = [
     path('custupdate', views.custupdate, name='custupdate'),
     path('custupdateimpl', views.custupdateimpl, name='custupdateimpl'),
     path('custadd', views.custadd, name='custadd'),
+
     path('itemlist', views.itemlist, name='itemlist'),
     path('itemadd', views.itemadd, name='itemadd'),
+    path('itemaddimpl', views.itemaddimpl, name='itemaddimpl'),
+    path('itemdetail', views.itemdetail, name='itemdetail'),
+    path('itemdelete', views.itemdelete, name='itemdelete'),
+    path('itemupdate', views.itemupdate, name='itemupdate'),
+    path('itemupdateimpl', views.itemupdateimpl, name='itemupdateimpl'),
 ]
