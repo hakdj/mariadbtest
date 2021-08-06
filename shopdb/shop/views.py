@@ -1,3 +1,5 @@
+import logging
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
@@ -9,6 +11,8 @@ from frame.cartdb import CartDB
 from frame.custdb import CustDB
 from frame.error import ErrorCode
 from frame.itemdb import ItemDB
+
+logger = logging.getLogger('users');
 
 
 def home(request):
@@ -126,10 +130,15 @@ def itemaddimpl(request):
 def itemdetail(request):
     id=request.GET['id'];
     item=ItemDB().selectone(int(id));
+
+    custid = request.session['logincust']['id'];
+    temp = 30;
+    weather = 'sun';
+    logger.debug(custid+','+item.name+','+str(item.price)+','+str(temp)+','+weather);
+
     context={
         'i':item
     };
-
     return render(request, 'itemdetail.html',context);
 
 def itemdelete(request):
