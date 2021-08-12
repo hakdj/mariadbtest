@@ -6,11 +6,11 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.utils.http import urlencode
 
-from config.settings import UPLOAD_DIR
-from frame.cartdb import CartDB
-from frame.custdb import CustDB
-from frame.error import ErrorCode
-from frame.itemdb import ItemDB
+from shopdb.config.settings import UPLOAD_DIR
+from shopdb.frame.cartdb import CartDB
+from shopdb.frame.custdb import CustDB
+from shopdb.frame.error import ErrorCode
+from shopdb.frame.itemdb import ItemDB
 
 logger = logging.getLogger('users');
 

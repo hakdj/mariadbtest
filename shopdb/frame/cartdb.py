@@ -1,7 +1,7 @@
-from frame.db import Db
-from frame.error import ErrorCode
-from frame.sql import Sql
-from frame.value import Cust, Item, Cart
+from shopdb.frame.db import Db
+from shopdb.frame.error import ErrorCode
+from shopdb.frame.sql import Sql
+from shopdb.frame.value import Cust, Item, Cart
 
 
 class CartDB(Db):
